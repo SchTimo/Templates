@@ -1,0 +1,130 @@
+% File to store all kind of Defintions ...
+%%%%%%%%%%%%%%%%%%%
+%% definitions
+%%%%%%%%%%%%%%%%%%%
+\graphicspath{{fig}}
+
+\def\BaAuthor{Max Mustermann}
+\def\BaTitle{Titel Titel Titel Titel}
+\def\BaSupervisorOne{Prof.\ Dr.\ Albert Einstein}
+\def\BaSupervisorTwo{Prof.\ Dr.\ Konrad Zuse}
+\def\BaDeadline{17.12.2017}
+
+
+
+\newcommand{\chapterref}[1]{Kapitel~\ref{#1}}
+\newcommand{\sectionref}[1]{Teilabschnitt~\ref{#1}}
+\newcommand{\imageref}[1]{Abbildung~\ref{#1}}
+\newcommand{\pageWithNameRef}[1]{\emph{\nameref{#1}}}
+\newcommand{\chapterWithNameRef}[1]{\chapterref{#1} --~\pageWithNameRef{#1}}
+\newcommand{\sectionWithNameRef}[1]{\sectionref{#1} --~\pageWithNameRef{#1}}
+\newcommand{\tableref}[1]{Tabelle~\ref{#1}}
+\newcommand{\tableWithNameRef}[1]{\tableref{#1} auf~\pageWithNameRef{#1}}
+\newcommand{\ideascrum}{Idea\-Scrum~}
+\newcommand{\imageWithNameRef}[1]{\imageref{#1} --~\pageWithNameRef{#1}}
+\newcommand{\sectionStarWithNameRef}[1]{Teilabschnitt~\emph{\nameref{#1}}}
+
+
+
+
+
+%\hypersetup{
+%pdfauthor={\BaAuthor},
+%pdftitle={\BaTitle},
+%pdfsubject={Choose your Subject wisely ... },
+%pdfkeywords={Lorem, Ipsum, etc...}
+%}
+%----------------------------------------------------------------------------------------
+%	HYPERLINKS IN THE DOCUMENTS
+%----------------------------------------------------------------------------------------
+
+\hypersetup{hidelinks,backref=true,pagebackref=true,hyperindex=true,colorlinks=false,breaklinks=true,urlcolor= timoorange,bookmarks=true,bookmarksopen=false,pdftitle={Title},pdfauthor={Author}}
+\usepackage{bookmark}
+\bookmarksetup{
+open,
+numbered,
+addtohook={%
+\ifnum\bookmarkget{level}=0 % chapter
+\bookmarksetup{bold}%
+\fi
+\ifnum\bookmarkget{level}=-1 % part
+\bookmarksetup{color=timoorange,bold}%
+\fi
+}
+}
+
+
+
+%----------------------------------------------------------------------------------------
+%	PART HEADINGS
+%----------------------------------------------------------------------------------------
+% Part text styling
+\titlecontents{part}[0cm]
+{\addvspace{20pt}\centering\large\bfseries}
+{}
+{}
+{}
+
+
+%% numbered part in the table of contents
+%\newcommand{\@mypartnumtocformat}[2]{%
+%\setlength\fboxsep{0pt}%
+%\noindent\colorbox{timoorange!20}{\strut\parbox[c][.7cm]{\ecart}{\color{timoorange!70}\Large\sffamily\bfseries\centering#1}}\hskip\esp\colorbox{timoorange!40}{\strut\parbox[c][.7cm]{\linewidth-\ecart-\esp}{\Large\sffamily\centering#2}}}%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% unnumbered part in the table of contents
+%\newcommand{\@myparttocformat}[1]{%
+%\setlength\fboxsep{0pt}%
+%\noindent\colorbox{timoorange!40}{\strut\parbox[c][.7cm]{\linewidth}{\Large\sffamily\centering#1}}}%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newlength\esp
+\setlength\esp{4pt}
+\newlength\ecart
+\setlength\ecart{1.2cm-\esp}
+\newcommand{\thepartimage}{}%
+\newcommand{\partimage}[1]{\renewcommand{\thepartimage}{#1}}%
+\def\@part[#1]#2{%
+\ifnum \c@secnumdepth >-2\relax%
+\refstepcounter{part}%
+\addcontentsline{toc}{part}{\texorpdfstring{\protect\@mypartnumtocformat{\thepart}{#1}}{\partname~\thepart\ ---\ #1}}
+\else%
+\addcontentsline{toc}{part}{\texorpdfstring{\protect\@myparttocformat{#1}}{#1}}%
+\fi%
+\startcontents%
+\markboth{}{}%
+{\thispagestyle{empty}%
+\begin{tikzpicture}[remember picture,overlay]%
+\node at (current page.north west){\begin{tikzpicture}[remember picture,overlay]%	
+\fill[timoorange!20](0cm,0cm) rectangle (\paperwidth,-\paperheight);
+\node[anchor=north] at (4cm,-3.25cm){\color{timoorange!40}\fontsize{220}{100}\sffamily\bfseries\@Roman\c@part}; 
+\node[anchor=south east] at (\paperwidth-1cm,-\paperheight+1cm){\parbox[t][][t]{8.5cm}{
+\printcontents{l}{0}{\setcounter{tocdepth}{1}}%
+}};
+\node[anchor=north east] at (\paperwidth-1.5cm,-3.25cm){\parbox[t][][t]{15cm}{\strut\raggedleft\color{white}\fontsize{30}{30}\sffamily\bfseries#2}};
+\end{tikzpicture}};
+\end{tikzpicture}}%
+\@endpart}
+\def\@spart#1{%
+\startcontents%
+\phantomsection
+{\thispagestyle{empty}%
+\begin{tikzpicture}[remember picture,overlay]%
+\node at (current page.north west){\begin{tikzpicture}[remember picture,overlay]%	
+\fill[timoorange!20](0cm,0cm) rectangle (\paperwidth,-\paperheight);
+\node[anchor=north east] at (\paperwidth-1.5cm,-3.25cm){\parbox[t][][t]{15cm}{\strut\raggedleft\color{white}\fontsize{30}{30}\sffamily\bfseries#1}};
+\end{tikzpicture}};
+\end{tikzpicture}}
+\addcontentsline{toc}{part}{\texorpdfstring{%
+\setlength\fboxsep{0pt}%
+\noindent\protect\colorbox{timoorange!40}{\strut\protect\parbox[c][.7cm]{\linewidth}{\Large\sffamily\protect\centering #1\quad\mbox{}}}}{#1}}%
+\@endpart}
+\def\@endpart{\vfil\newpage
+\if@twoside
+\if@openright
+\null
+\thispagestyle{empty}%
+\newpage
+\fi
+\fi
+\if@tempswa
+\twocolumn
+\fi}
