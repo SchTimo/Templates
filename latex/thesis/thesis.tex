@@ -5,8 +5,9 @@
 %%%
 \input{utils/packages}
 \input{utils/bibliography_options}
-\input{utils/definitions}
 \input{utils/file_options}
+\input{utils/definitions}
+
 
 %%%
 % END PRÄAMBEL
@@ -18,6 +19,7 @@
 \begin{document}
 
 \input{content/titlepage}
+
 
 \input{content/Vorhang/abstract.tex}
 \input{content/Vorhang/danksagung.tex}
@@ -35,6 +37,7 @@
 %=========
 % Einleitung
 %=========
+\part*{Einleitung}
 \input{content/Einleitung/introduction.tex}
 \input{content/Einleitung/basics.tex}
 \input{content/Einleitung/problem.tex}
@@ -42,13 +45,17 @@
 %=========
 % Hauptteil
 %=========
+\part*{Hauptteil}
 \input{content/Hauptteil/solution.tex}
 \input{content/Hauptteil/evaluation.tex}
 
 %=========
 % Schluss
 %=========
+\part*{Schluss}
 \input{content/Schluss/fazit.tex}
+
+
 
 %%%
 % CONTENT
@@ -70,12 +77,13 @@
 %%%%%%%%%%%%%%%%%%%
 %% create listings list
 %%%%%%%%%%%%%%%%%%%
-%\lstlistoflistings
-%\addcontentsline{toc}{chapter}{Listings}				
+\lstlistoflistings
+\addcontentsline{toc}{chapter}{Listings}				
 
 \printbibliography
 \addcontentsline{toc}{chapter}{Literatur}				
 
+\appendix
 
 \input{content/oath.tex}
 \end{document}

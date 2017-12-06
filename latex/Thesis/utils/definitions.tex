@@ -54,9 +54,30 @@ addtohook={%
 }
 
 
+%%%%%%%%%%%%%%%%% BibFilters %%%%%%%%%%%%%%%%%
+\defbibfilter{papers}{
+  type=article or
+  type=inproceedings
+}
+
+\defbibfilter{books}{
+  type=book or
+  type=inbook or
+  type=booklet or
+  type=incollection
+}
+\defbibfilter{theses}{
+  type=masterthesis or
+  type=phdthesis
+}
+
+%%%%%%%%%%%%%%%%% BibFilters %%%%%%%%%%%%%%%%%
+
+
+
 
 %----------------------------------------------------------------------------------------
-%	PART HEADINGS
+%	PART Definition
 %----------------------------------------------------------------------------------------
 % Part text styling
 \titlecontents{part}[0cm]
@@ -65,17 +86,17 @@ addtohook={%
 {}
 {}
 
-
-%% numbered part in the table of contents
-%\newcommand{\@mypartnumtocformat}[2]{%
-%\setlength\fboxsep{0pt}%
-%\noindent\colorbox{timoorange!20}{\strut\parbox[c][.7cm]{\ecart}{\color{timoorange!70}\Large\sffamily\bfseries\centering#1}}\hskip\esp\colorbox{timoorange!40}{\strut\parbox[c][.7cm]{\linewidth-\ecart-\esp}{\Large\sffamily\centering#2}}}%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% unnumbered part in the table of contents
-%\newcommand{\@myparttocformat}[1]{%
-%\setlength\fboxsep{0pt}%
-%\noindent\colorbox{timoorange!40}{\strut\parbox[c][.7cm]{\linewidth}{\Large\sffamily\centering#1}}}%
+\makeatletter
+% numbered part in the table of contents
+\newcommand{\@mypartnumtocformat}[2]{%
+\setlength\fboxsep{0pt}%
+\noindent\colorbox{timoorange!20}{\strut\parbox[c][.7cm]{\ecart}{\color{timoorange!70}\Large\sffamily\bfseries\centering#1}}\hskip\esp\colorbox{timoorange!40}{\strut\parbox[c][.7cm]{\linewidth-\ecart-\esp}{\Large\sffamily\centering#2}}}%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% unnumbered part in the table of contents
+\newcommand{\@myparttocformat}[1]{%
+\setlength\fboxsep{0pt}%
+\noindent\colorbox{timoorange!40}{\strut\parbox[c][.7cm]{\linewidth}{\Large\sffamily\centering#1}}}%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newlength\esp
 \setlength\esp{4pt}
 \newlength\ecart
@@ -128,3 +149,4 @@ addtohook={%
 \if@tempswa
 \twocolumn
 \fi}
+\makeatother
